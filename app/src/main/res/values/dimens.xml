@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="level_1">75dp</dimen>
+    <dimen name="level_2">135dp</dimen>
+    <dimen name="level_3">195dp</dimen>
+    <dimen name="level_4">255dp</dimen>
+    <dimen name="level_5">315dp</dimen>
+    <dimen name="level_6">375dp</dimen>
+    <dimen name="naturalFabX">5dp</dimen>
+    <dimen name="naturalFabY">15dp</dimen>
+    <dimen name="dp24">24dp</dimen>
+</resources>

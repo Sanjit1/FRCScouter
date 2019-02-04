@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">FRC Scouter</string>
+    <string name="settings">Settings</string>
+    <string name="templates">Templates</string>
+    <string name="about">About</string>
+    <string name="rate">Rate</string>
+    <string name="title_activity_templates">templates</string>
+    <string name="template_maker">Template Maker</string>
+    <string name="title_activity_add_templates">Add Templates</string>
+    <string name="add_templates">Add Templates</string>
+    <string name="check_box">Check Box</string>
+    <string name="timer">Timer</string>
+    <string name="text">Text</string>
+    <string name="spinner">Spinner</string>
+    <string name="counter">Counter</string>
+    <string name="edit_text">Edit Text</string>
+    <string name="name_of_activity">Activity Name</string>
+    <string name="save">Save</string>
+    <string name="title_activity_view">viewActivity</string>
+    <string name="listOfTemplates">List of Templates</string>
+</resources>
