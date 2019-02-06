@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View button){
+
         if (button==findViewById(R.id.templates)){
             Intent myIntent = new Intent(MainActivity.this,
                     templates.class);
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             }
             File gpxfile = new File(root, childName);
             FileWriter writer = new FileWriter(gpxfile);
-            writer.append("");
             writer.flush();
             writer.close();
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();

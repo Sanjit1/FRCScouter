@@ -18,27 +18,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class addTemplates extends AppCompatActivity {
     ArrayList<editTextObject> textInput = new ArrayList<>();
@@ -59,6 +46,8 @@ public class addTemplates extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_templates);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -74,7 +63,18 @@ public class addTemplates extends AppCompatActivity {
         findViewById(R.id.timerFABHolder).setVisibility(View.GONE);
         findViewById(R.id.checkFABHolder).setVisibility(View.GONE);
 
+        File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData");
+        createDir(scout);
+        scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+        createDir(scout);
+
+        Save(scout,"activity.🚀🤖🚀");
     }
+
+
+
+
+
 
     public void onBackPressed(){
         Intent myIntent = new Intent(this,
@@ -295,11 +295,45 @@ public class addTemplates extends AppCompatActivity {
         }
     }
 
+    public void createDir(File scout){
+        if (!scout.exists() && !scout.isDirectory()) {
+            // create empty directory
+            if (scout.mkdirs()) {
+                Log.i("CreateDir", "App dir created");
+            }
+        } else {
+            Log.i("CreateDir", "App dir already exists");
+        }
+    }
 
+    public void Save(File root, String childName){
+        try
+        {
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, childName);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append("");
+            writer.flush();
+            writer.close();
+            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+        }
+        catch(IOException e)
+        {
+            Log.e("",e.getMessage());
+
+        }
+    }
 
     public void save(View v){
 
         try {
+
+
+
+
+
             File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/activity.🚀🤖🚀"));
             String[] arrOfStr;
             FileReader activityList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");

@@ -53,7 +53,13 @@ public class templates extends AppCompatActivity {
                 nameOfActivity.setBackgroundTintList(findViewById(R.id.reference).getBackgroundTintList());
                 nameOfActivity.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
+                        File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData");
+                        if (!scout.exists()){
+                            createDir(scout);
+                            scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+                            createDir(scout);
 
+                            Save(scout,"activity.🚀🤖🚀"); }
 
                         File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/cache"));
 
@@ -83,15 +89,59 @@ public class templates extends AppCompatActivity {
     }
 
 
+    public void createDir(File scout){
+        if (!scout.exists() && !scout.isDirectory()) {
+            // create empty directory
+            if (scout.mkdirs()) {
+                Log.i("CreateDir", "App dir created");
+            }
+        } else {
+            Log.i("CreateDir", "App dir already exists");
+        }
+    }
+
+    public void Save(File root, String childName){
+        try
+        {
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, childName);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.flush();
+            writer.close();
+            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+        }
+        catch(IOException e)
+        {
+            Log.e("",e.getMessage());
+
+        }
+    }
+
 
 
     public void onBackPressed(){
+        File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData");
+        if (!scout.exists()){
+            createDir(scout);
+            scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+            createDir(scout);
+
+            Save(scout,"activity.🚀🤖🚀"); }
         Intent myIntent = new Intent(this,
                 MainActivity.class);
         startActivity(myIntent);
     }
 
     public void onClick(View button){
+        File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData");
+        if (!scout.exists()){
+            createDir(scout);
+            scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+            createDir(scout);
+
+            Save(scout,"activity.🚀🤖🚀"); }
         if (button==findViewById(R.id.add)){
             Intent myIntent = new Intent(templates.this,
                     addTemplates.class);
