@@ -15,9 +15,15 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/rate"
+        android:id="@+id/github"
         android:orderInCategory="100"
-        android:title="@string/rate"
+        android:title="@string/github"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/githubPage"
+        android:orderInCategory="100"
+        android:title="@string/pages"
         app:showAsAction="never" />
 
 </menu>

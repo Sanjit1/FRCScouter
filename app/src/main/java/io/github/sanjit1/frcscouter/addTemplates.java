@@ -68,7 +68,8 @@ public class addTemplates extends AppCompatActivity {
         scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
         createDir(scout);
 
-        Save(scout,"activity.🚀🤖🚀");
+        File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
+        if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀");
     }
 
 

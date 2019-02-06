@@ -18,4 +18,6 @@
     <string name="save">Save</string>
     <string name="title_activity_view">viewActivity</string>
     <string name="listOfTemplates">List of Templates</string>
+    <string name="github">Github</string>
+    <string name="pages">Github Page</string>
 </resources>

@@ -59,7 +59,8 @@ public class templates extends AppCompatActivity {
                             scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
                             createDir(scout);
 
-                            Save(scout,"activity.🚀🤖🚀"); }
+                            File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
+                            if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀"); }
 
                         File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/cache"));
 
@@ -128,7 +129,8 @@ public class templates extends AppCompatActivity {
             scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
             createDir(scout);
 
-            Save(scout,"activity.🚀🤖🚀"); }
+            File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
+            if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀");}
         Intent myIntent = new Intent(this,
                 MainActivity.class);
         startActivity(myIntent);
@@ -141,7 +143,8 @@ public class templates extends AppCompatActivity {
             scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
             createDir(scout);
 
-            Save(scout,"activity.🚀🤖🚀"); }
+            File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
+            if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀"); }
         if (button==findViewById(R.id.add)){
             Intent myIntent = new Intent(templates.this,
                     addTemplates.class);
