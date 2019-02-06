@@ -18,14 +18,27 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class addTemplates extends AppCompatActivity {
     ArrayList<editTextObject> textInput = new ArrayList<>();
@@ -305,14 +318,19 @@ public class addTemplates extends AppCompatActivity {
 
             FileWriter activityAdder = new FileWriter(activityFile);
             for (int i = 0; i < arrOfStr.length; i++) {
-                    activityAdder.append(arrOfStr[i]);
-                    activityAdder.append(System.lineSeparator());
-                }
+                activityAdder.append(arrOfStr[i]);
+                activityAdder.append(System.lineSeparator());
+            }
 
-                if(!Arrays.asList(arrOfStr).contains(((EditText) findViewById(R.id.activityName)).getText().toString())) activityAdder.append(((EditText) findViewById(R.id.activityName)).getText().toString());
+            if(!Arrays.asList(arrOfStr).contains(((EditText) findViewById(R.id.activityName)).getText().toString())) activityAdder.append(((EditText) findViewById(R.id.activityName)).getText().toString());
 
             activityAdder.flush();
             activityAdder.close();
+
+
+
+
+
 
 
 

@@ -27,10 +27,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -295,7 +297,6 @@ Workbook export;
             }else if (Objects.equals(array[lineNumb], "EditText")) {
                 lineNumb++;
                 paramName.add(array[lineNumb]);
-                Toast.makeText(this, array[lineNumb+1],Toast.LENGTH_SHORT ).show();
                 edits.add(new editTextObject(array[lineNumb],(array[lineNumb+1])));
                 lineNumb++;
                 structure.add("Edit");
@@ -329,27 +330,33 @@ Workbook export;
 
 
     public void export(View v) {
-        int checkCounter = 0;
-        int timerCounter = 0;
-        int editCounter = 0;
-        int spinnerCounter = 0;
-        int counterCounter = 0;
-        File xls = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/" + getSupportActionBar().getTitle() + ".xls"));
-        int rowNumb = 0;
-        if (!xls.exists()) {
-            export = new HSSFWorkbook();
-            export.createSheet("🚀").createRow(0);
-            for (int i = 0; i < paramName.size(); i++) {
-                export.getSheetAt(0).getRow(0).createCell(i).setCellValue(paramName.get(i));
-            }
-            for (int i = 1; i < 6100; i++) {
-                export.getSheetAt(0).createRow(i).createCell(0).setCellValue(" ");
-            }
-        }
+        try {
+            int checkCounter = 0;
+            int timerCounter = 0;
+            int editCounter = 0;
+            int spinnerCounter = 0;
+            int counterCounter = 0;
 
-        while (export.getSheetAt(0).getRow(rowNumb).getCell(0).toString() != " ") {
-            rowNumb++;
-        }
+            File xls = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/" + getSupportActionBar().getTitle() + ".xls"));
+            int rowNumb = 0;
+
+            if (!xls.exists()) {
+                export = new HSSFWorkbook();
+                export.createSheet("🚀").createRow(0);
+
+                for (int i = 0; i < paramName.size(); i++) {
+                    export.getSheetAt(0).getRow(0).createCell(i).setCellValue(paramName.get(i));
+                }
+            } else {
+                InputStream ExcelFileToRead = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
+                export = new HSSFWorkbook(ExcelFileToRead);
+            }
+
+            while (export.getSheetAt(0).getRow(rowNumb) != null) {
+                rowNumb++;
+            }
+            export.getSheetAt(0).createRow(rowNumb);
+
         boolean textEmpty = false;
         for (int texCheck = 0; texCheck < edits.size(); texCheck++) {
             if (TextUtils.isEmpty(edits.get(texCheck).getTextString())) {
@@ -378,7 +385,7 @@ Workbook export;
                 } else if (Objects.equals(structure.get(i),"Text")){
                 }
             }
-            try {
+
                 FileWriter writer = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
                 writer.flush();
                 writer.close();
@@ -388,13 +395,14 @@ Workbook export;
                 out.close();
                 // now that we have successfully finished the conversion, we toast a message to the user telling them about our success
                 Toast.makeText(getApplicationContext(), "Exported to "+getSupportActionBar().getTitle()+".xls", Toast.LENGTH_SHORT).show();
-            }
+
+
+
+
+
+        }
+        }
             catch (IOException e){
-
-            }
-
-
-
 
         }
     }
