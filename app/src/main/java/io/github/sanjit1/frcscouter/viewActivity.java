@@ -1,5 +1,8 @@
 package io.github.sanjit1.frcscouter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
@@ -39,7 +42,7 @@ import static java.lang.Math.round;
 
 public class viewActivity extends AppCompatActivity {
 
-
+String teamNumber;
 int lineNumb = 1;
 Workbook export;
     ArrayList<checkBoxObject> checks = new ArrayList<>();
@@ -62,6 +65,27 @@ Workbook export;
         setSupportActionBar(toolbar);
         parent = findViewById(R.id.parent);
         reff = findViewById(R.id.reference);
+
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(viewActivity.this);
+        alert.setTitle("Team Number");
+        alert.setMessage("Enter Team Number to scout");
+
+        final EditText input = new EditText(viewActivity.this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        alert.setView(input);
+
+        alert.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                teamNumber = String.valueOf(input.getText());
+
+            }
+        });
+        alert.show();
+
+
+
         try {
             FileReader cache = new FileReader((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/ActivityData/cache");
             BufferedReader buffR = new BufferedReader(cache);
@@ -83,6 +107,7 @@ Workbook export;
                 sb.append(line).append("\n");
                 line = br.readLine();
             }
+
             String fileAsString = sb.toString();
             String[] arrOfStr = fileAsString.split(System.lineSeparator(), 0);
             getSupportActionBar().setTitle(arrOfStr[0]);
@@ -115,6 +140,17 @@ Workbook export;
         }
 
     }
+
+
+
+    public void onBackPressed(){
+        Intent myIntent = new Intent(this,
+                templates.class);
+        startActivity(myIntent);
+    }
+
+
+
 
 
     public class timerObject{
@@ -167,7 +203,7 @@ Workbook export;
             chronometer.stop();
             intSeconds = round(-timeInSecs/1000);
             return ((intSeconds-(intSeconds%60))/60+":"+((intSeconds%60<10)?"0"+intSeconds%60:intSeconds%60));
-    }
+        }
 
     }
 
@@ -243,7 +279,7 @@ Workbook export;
             decrement.setBackgroundTintList(reff.getBackgroundTintList());
             decrement.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v){
-                    if(val>1) val--;
+                    if(val>0) val--;
                     value.setText(Integer.toString(val));
                 }
             });
@@ -329,6 +365,10 @@ Workbook export;
 
 
     public void export(View v) {
+
+
+
+
         try {
             int checkCounter = 0;
             int timerCounter = 0;
@@ -342,10 +382,11 @@ Workbook export;
             if (!xls.exists()) {
                 export = new HSSFWorkbook();
                 export.createSheet("🚀").createRow(0);
-
+                paramName.add("");
                 for (int i = 0; i < paramName.size(); i++) {
                     export.getSheetAt(0).getRow(0).createCell(i).setCellValue(paramName.get(i));
                 }
+                export.getSheetAt(0).getRow(0).createCell(paramName.size()+1).setCellValue("Team Number");
             } else {
                 InputStream ExcelFileToRead = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
                 export = new HSSFWorkbook(ExcelFileToRead);
@@ -384,6 +425,7 @@ Workbook export;
                 } else if (Objects.equals(structure.get(i),"Text")){
                 }
             }
+            export.getSheet("🚀").getRow(rowNumb).createCell(structure.size()+1).setCellValue(teamNumber);
 
                 FileWriter writer = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
                 writer.flush();
@@ -394,10 +436,6 @@ Workbook export;
                 out.close();
                 // now that we have successfully finished the conversion, we toast a message to the user telling them about our success
                 Toast.makeText(getApplicationContext(), "Exported to "+getSupportActionBar().getTitle()+".xls", Toast.LENGTH_SHORT).show();
-
-
-
-
 
         }
         }

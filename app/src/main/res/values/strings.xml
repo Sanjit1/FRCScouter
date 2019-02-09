@@ -20,4 +20,5 @@
     <string name="listOfTemplates">List of Templates</string>
     <string name="github">Github</string>
     <string name="pages">Github Page</string>
+    <string name="title_activity_search">search</string>
 </resources>

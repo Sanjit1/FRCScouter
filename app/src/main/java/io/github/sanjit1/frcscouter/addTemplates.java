@@ -356,7 +356,6 @@ public class addTemplates extends AppCompatActivity {
                 activityAdder.append(arrOfStr[i]);
                 activityAdder.append(System.lineSeparator());
             }
-
             if(!Arrays.asList(arrOfStr).contains(((EditText) findViewById(R.id.activityName)).getText().toString())) activityAdder.append(((EditText) findViewById(R.id.activityName)).getText().toString());
 
             activityAdder.flush();
@@ -436,6 +435,9 @@ public class addTemplates extends AppCompatActivity {
                 }
             }
             writer.append("endActivity🤖🚀🤖🚀");
+            EditText description = findViewById(R.id.description);
+            writer.append(System.lineSeparator());
+            writer.append(description.getText().toString());
             writer.flush();
             writer.close();
 

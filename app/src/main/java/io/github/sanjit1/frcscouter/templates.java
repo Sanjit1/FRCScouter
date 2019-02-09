@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -17,9 +19,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class templates extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,6 @@ public class templates extends AppCompatActivity {
         setContentView(R.layout.activity_templates);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
 
 
@@ -44,15 +46,79 @@ public class templates extends AppCompatActivity {
                 sb.append(line).append("\n");
                 line = br.readLine();
             }
+
             String fileAsString = sb.toString();
             String[] arrOfStr = fileAsString.split(System.lineSeparator(), 0);
-            for (int numb = 0; numb<arrOfStr.length;numb++ ){
+
+
+
+
+
+            for ( int numb = 1; numb<arrOfStr.length;numb++ ){
+                FileReader activity = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/ActivityData/"+arrOfStr[numb]+".🚀🤖");
+                BufferedReader b = new BufferedReader(activity);
+                StringBuilder s = new StringBuilder();
+                String lin = b.readLine();
+                while (lin != null) {
+                    s.append(lin).append("\n");
+                    lin = b.readLine();
+                }
+
+                String fi = s.toString();
+                String[] arr = fi.split(System.lineSeparator(), 0);
+                String desc = arr[arr.length-1];
+
+                final int number = numb;
                 CardView layoutHolder = new CardView(this);
+                CardView ref = findViewById(R.id.refCard);
+                LinearLayout trashAndOthers = new LinearLayout(this);
+                Button trash = new Button(this);
+                trash.setLayoutParams(findViewById(R.id.reference).getLayoutParams());
+                trash.setBackground(getDrawable(R.drawable.ic_delete_black_24dp));
+                trash.setGravity(Gravity.END | Gravity.CENTER);
+                trashAndOthers.setGravity(Gravity.LEFT | Gravity.CENTER);
+                layoutHolder.setLayoutParams(ref.getLayoutParams());
                 LinearLayout textHolder = new LinearLayout(this);
-                final Button nameOfActivity = new Button(this);
-                nameOfActivity.setBackgroundTintList(findViewById(R.id.reference).getBackgroundTintList());
-                nameOfActivity.setOnClickListener(new View.OnClickListener() {
+                textHolder.setOrientation(LinearLayout.VERTICAL);
+                TextView name = new TextView(this);
+                name.setTextSize(24);
+                TextView description = new TextView(this);
+                name.setText(arrOfStr[numb]);
+                description.setMaxLines(2);
+                description.setText(desc);
+                description.setTextSize(17);
+                textHolder.addView(name);
+                textHolder.addView(description);
+                textHolder.setWeightSum(1);
+                trashAndOthers.addView(textHolder);
+                trashAndOthers.addView(trash);
+                layoutHolder.addView(trashAndOthers);
+                parent.addView(layoutHolder);
+                trash.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
+                        try {
+                            File activityWrite = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/activity.🚀🤖🚀"));
+                            FileWriter writer = new FileWriter(activityWrite);
+                            ArrayList<String> write = new ArrayList<>(Arrays.asList(arrOfStr));
+                            for (int adder = 0; adder<write.size(); adder++){
+                                if (write.get(adder) != arrOfStr[number]) {
+                                    writer.append(write.get(adder));
+                                    writer.append(System.lineSeparator());
+                                }
+                            }
+                            writer.close();
+                            activityWrite = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/"+arrOfStr[number]+".🚀🤖"));
+                            activityWrite.delete();
+                            onRestart();
+                        }
+                        catch(IOException e){}
+                    }
+
+                });
+                layoutHolder.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v){
+
+
                         File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData");
                         if (!scout.exists()){
                             createDir(scout);
@@ -66,7 +132,7 @@ public class templates extends AppCompatActivity {
 
                         try{
                             FileWriter writer = new FileWriter(activityFile);
-                            writer.append(nameOfActivity.getText());
+                            writer.append(arrOfStr[number]);
                             writer.flush();
                             writer.close();
                             Intent myIntent = new Intent(getApplicationContext(),
@@ -76,10 +142,7 @@ public class templates extends AppCompatActivity {
 
                     }
                 });
-                nameOfActivity.setText(arrOfStr[numb]);
-                textHolder.addView(nameOfActivity);
-                layoutHolder.addView(textHolder);
-                parent.addView(layoutHolder);
+
             }
         } catch(IOException e){
             // You are toast!!
@@ -89,10 +152,132 @@ public class templates extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setContentView(R.layout.activity_templates);
+
+        LinearLayout parent = findViewById(R.id.parent);
+        try{
+            FileReader activityList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
+            BufferedReader br = new BufferedReader(activityList);
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line).append("\n");
+                line = br.readLine();
+            }
+
+            String fileAsString = sb.toString();
+            String[] arrOfStr = fileAsString.split(System.lineSeparator(), 0);
+
+
+
+
+
+            for ( int numb = 1; numb<arrOfStr.length;numb++ ){
+                FileReader activity = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/ActivityData/"+arrOfStr[numb]+".🚀🤖");
+                BufferedReader b = new BufferedReader(activity);
+                StringBuilder s = new StringBuilder();
+                String lin = b.readLine();
+                while (lin != null) {
+                    s.append(lin).append("\n");
+                    lin = b.readLine();
+                }
+
+                String fi = s.toString();
+                String[] arr = fi.split(System.lineSeparator(), 0);
+                String desc = arr[arr.length-1];
+
+                final int number = numb;
+                CardView layoutHolder = new CardView(this);
+                CardView ref = findViewById(R.id.refCard);
+                LinearLayout trashAndOthers = new LinearLayout(this);
+                Button trash = new Button(this);
+                trash.setLayoutParams(findViewById(R.id.reference).getLayoutParams());
+                trash.setBackground(getDrawable(R.drawable.ic_delete_black_24dp));
+                trash.setGravity(Gravity.END | Gravity.CENTER);
+                trashAndOthers.setGravity(Gravity.LEFT | Gravity.CENTER);
+                layoutHolder.setLayoutParams(ref.getLayoutParams());
+                LinearLayout textHolder = new LinearLayout(this);
+                textHolder.setOrientation(LinearLayout.VERTICAL);
+                TextView name = new TextView(this);
+                name.setTextSize(24);
+                TextView description = new TextView(this);
+                name.setText(arrOfStr[numb]);
+                description.setMaxLines(2);
+                description.setText(desc);
+                description.setTextSize(17);
+                textHolder.addView(name);
+                textHolder.addView(description);
+                textHolder.setWeightSum(1);
+                trashAndOthers.addView(textHolder);
+                trashAndOthers.addView(trash);
+                layoutHolder.addView(trashAndOthers);
+                parent.addView(layoutHolder);
+                trash.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v){
+                        try {
+                            File activityWrite = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/activity.🚀🤖🚀"));
+                            FileWriter writer = new FileWriter(activityWrite);
+                            ArrayList<String> write = new ArrayList<>(Arrays.asList(arrOfStr));
+                            for (int adder = 0; adder<write.size(); adder++){
+                                if (write.get(adder) != arrOfStr[number]) {
+                                    writer.append(write.get(adder));
+                                    writer.append(System.lineSeparator());
+                                }
+                            }
+                            writer.flush();
+                            writer.close();
+                            activityWrite = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/"+arrOfStr[number]+".🚀🤖"));
+                            activityWrite.delete();
+                            activityWrite = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + (arrOfStr[number]+".xls"));
+                            activityWrite.delete();
+                            onRestart();
+                        }
+                        catch(IOException e){}
+                    }
+
+                });
+                layoutHolder.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v){
+
+
+                        File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData");
+                        if (!scout.exists()){
+                            createDir(scout);
+                            scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+                            createDir(scout);
+
+                            File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
+                            if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀"); }
+
+                        File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/cache"));
+
+                        try{
+                            FileWriter writer = new FileWriter(activityFile);
+                            writer.append(arrOfStr[number]);
+                            writer.flush();
+                            writer.close();
+                            Intent myIntent = new Intent(getApplicationContext(),
+                                    viewActivity.class);
+                            startActivity(myIntent);
+                        } catch (IOException e){}
+
+                    }
+                });
+
+            }
+        } catch(IOException e){
+            // You are toast!!
+        }
+
+
+    }
+
 
     public void createDir(File scout){
         if (!scout.exists() && !scout.isDirectory()) {
-            // create empty directory
             if (scout.mkdirs()) {
                 Log.i("CreateDir", "App dir created");
             }
