@@ -3,6 +3,7 @@ package io.github.sanjit1.frcscouter;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -73,9 +74,17 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.github:
+                String url = "https://github.com/Sanjit1/FRCScouter";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
                 break;
 
             case R.id.githubPage:
+                String url1 = "https://sanjit1.github.io/FRCScouter";
+                Intent i1 = new Intent(Intent.ACTION_VIEW);
+                i1.setData(Uri.parse(url1));
+                startActivity(i1);
                 break;
 
         }

@@ -1,5 +1,7 @@
 package io.github.sanjit1.frcscouter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class About extends AppCompatActivity {
@@ -70,8 +74,27 @@ public class About extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.settings:
+                break;
 
-        return super.onOptionsItemSelected(item);
+            case R.id.github:
+                String url = "https://github.com/Sanjit1/FRCScouter";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                break;
+
+            case R.id.githubPage:
+                String url1 = "https://sanjit1.github.io/FRCScouter";
+                Intent i1 = new Intent(Intent.ACTION_VIEW);
+                i1.setData(Uri.parse(url1));
+                startActivity(i1);
+                break;
+
+        }
+        return true;
     }
 
     /**
@@ -104,23 +127,39 @@ public class About extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_about, container, false);
             TextView textView =  rootView.findViewById(R.id.section_label);
+            Button github = rootView.findViewById(R.id.github1) ;
+            ImageView appIcon =rootView.findViewById(R.id.imageView) ;
             if(getArguments().getInt(ARG_SECTION_NUMBER) == 1){
-                textView.setText("Tab 1");
+                appIcon.setVisibility(View.VISIBLE);
+                textView.setText(getString(R.string.about_app));
+                github.setVisibility(View.GONE);
             } else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2){
-                textView.setText("Tab 2");
+                appIcon.setVisibility(View.GONE);
+                textView.setText(getString(R.string.about_me));
+                github.setVisibility(View.VISIBLE);
             } else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
-                textView.setText("Tab 3");
+                appIcon.setVisibility(View.GONE);
+                github.setVisibility(View.GONE);
+                textView.setText(getString(R.string.libraries));
             }
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 
             return rootView;
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+    public void gotToHub(View v){
+        String url = "https://github.com/Sanjit1";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
+
+    public void mailTheIdiot (View v){
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto:sanjitsarda4@gmail.com"));
+        startActivity(Intent.createChooser(emailIntent, "Send feedback to Sanjit!!"));
+        }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
