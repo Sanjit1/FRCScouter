@@ -34,10 +34,11 @@
                 android:onClick="onClick"
                 android:text="@string/templates" />
 
+
         </LinearLayout>
+
+
     </ScrollView>
-
-
 
 
 </android.support.constraint.ConstraintLayout>
