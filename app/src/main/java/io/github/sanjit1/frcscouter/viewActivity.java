@@ -360,7 +360,7 @@ Workbook export;
                 int timerCounter = 0;
                 int editCounter = 0;
                 int spinnerCounter = 0;
-                int counterCounter = 1;
+                int counterCounter = 0;
 
                 File xls = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/" + getSupportActionBar().getTitle() + ".xls"));
                 int rowNumb = 0;
