@@ -1,19 +1,17 @@
 package io.github.sanjit1.frcscouter;
 
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +21,6 @@ import java.util.ArrayList;
 public class search extends AppCompatActivity {
 
     ArrayList<String> teams = new ArrayList<>();
-    String number;
     LinearLayout parent ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
