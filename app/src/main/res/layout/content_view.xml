@@ -16,23 +16,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/reference"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/colorSecondary"
-            android:visibility="gone"/>
+            <EditText
+                android:id="@+id/teamNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Team Number"
+                android:inputType="number" />
+            <Button
+                android:id="@+id/reference"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorSecondary"
+                android:visibility="gone"/>
 
 
 
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

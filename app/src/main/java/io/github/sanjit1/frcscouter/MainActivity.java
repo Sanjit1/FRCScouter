@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
             Intent myIntent = new Intent(MainActivity.this,
                     templates.class);
             startActivity(myIntent);
+        } else {
+            Intent myIntent = new Intent(MainActivity.this,
+                    search.class);
+            startActivity(myIntent);
         }
     }
 

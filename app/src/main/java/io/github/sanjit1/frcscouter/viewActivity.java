@@ -53,7 +53,7 @@ Workbook export;
     ArrayList<textObject> texts = new ArrayList<>();
     ArrayList<String> structure = new ArrayList<>();
     ArrayList<String> paramName = new ArrayList<>();
-
+    EditText input;
     LinearLayout parent;
     Button  reff ;
     @Override
@@ -67,23 +67,7 @@ Workbook export;
         reff = findViewById(R.id.reference);
 
 
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(viewActivity.this);
-        alert.setTitle("Team Number");
-        alert.setMessage("Enter Team Number to scout");
-
-        final EditText input = new EditText(viewActivity.this);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        alert.setView(input);
-
-        alert.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                teamNumber = String.valueOf(input.getText());
-
-            }
-        });
-        alert.show();
-
+        input = findViewById(R.id.teamNumber);
 
 
         try {
@@ -365,82 +349,84 @@ Workbook export;
 
 
     public void export(View v) {
+        if (input.getText() == null) {
 
-
-
-
-        try {
-            int checkCounter = 0;
-            int timerCounter = 0;
-            int editCounter = 0;
-            int spinnerCounter = 0;
-            int counterCounter = 0;
-
-            File xls = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/" + getSupportActionBar().getTitle() + ".xls"));
-            int rowNumb = 0;
-
-            if (!xls.exists()) {
-                export = new HSSFWorkbook();
-                export.createSheet("🚀").createRow(0);
-                paramName.add("");
-                for (int i = 0; i < paramName.size(); i++) {
-                    export.getSheetAt(0).getRow(0).createCell(i).setCellValue(paramName.get(i));
-                }
-                export.getSheetAt(0).getRow(0).createCell(paramName.size()+1).setCellValue("Team Number");
-            } else {
-                InputStream ExcelFileToRead = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
-                export = new HSSFWorkbook(ExcelFileToRead);
-            }
-
-            while (export.getSheetAt(0).getRow(rowNumb) != null) {
-                rowNumb++;
-            }
-            export.getSheetAt(0).createRow(rowNumb);
-
-        boolean textEmpty = false;
-        for (int texCheck = 0; texCheck < edits.size(); texCheck++) {
-            if (TextUtils.isEmpty(edits.get(texCheck).getTextString())) {
-                textEmpty = true;
-                Toast.makeText(getApplicationContext(), "At least one of the text inputs are empty", Toast.LENGTH_LONG).show();
-            }
-        }
-        if (textEmpty) {
         } else {
-            for (int i = 0; i < structure.size(); i++) {
-                if (Objects.equals(structure.get(i),"Check")){
-                    export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(checks.get(checkCounter).getCheckString());
-                    checkCounter++;
-                } else if (Objects.equals(structure.get(i),"Time")){
-                    export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(timers.get(timerCounter).getTimeString());
-                    timerCounter++;
-                } else if (Objects.equals(structure.get(i),"Edit")){
-                    export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(edits.get(editCounter).getTextString());
-                    editCounter++;
-                } else if (Objects.equals(structure.get(i),"Spinner")){
-                    export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(spins.get(spinnerCounter).getChoiceString());
-                    spinnerCounter++;
-                } else if (Objects.equals(structure.get(i),"Counter")){
-                    export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(counters.get(counterCounter).getValString());
-                    counterCounter++;
-                } else if (Objects.equals(structure.get(i),"Text")){
+            teamNumber = String.valueOf(input.getText());
+
+
+            try {
+                int checkCounter = 0;
+                int timerCounter = 0;
+                int editCounter = 0;
+                int spinnerCounter = 0;
+                int counterCounter = 1;
+
+                File xls = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/" + getSupportActionBar().getTitle() + ".xls"));
+                int rowNumb = 0;
+
+                if (!xls.exists()) {
+                    export = new HSSFWorkbook();
+                    export.createSheet("🚀").createRow(0);
+                    paramName.add("");
+                    for (int i = 0; i < paramName.size(); i++) {
+                        export.getSheetAt(0).getRow(0).createCell(i+1).setCellValue(paramName.get(i));
+                    }
+                    export.getSheetAt(0).getRow(0).createCell(0).setCellValue("Team Number");
+                } else {
+                    InputStream ExcelFileToRead = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
+                    export = new HSSFWorkbook(ExcelFileToRead);
                 }
+
+                while (export.getSheetAt(0).getRow(rowNumb) != null) {
+                    rowNumb++;
+                }
+                export.getSheetAt(0).createRow(rowNumb);
+                export.getSheet("🚀").getRow(rowNumb).createCell(0).setCellValue(teamNumber);
+                boolean textEmpty = false;
+                for (int texCheck = 0; texCheck < edits.size(); texCheck++) {
+                    if (TextUtils.isEmpty(edits.get(texCheck).getTextString())) {
+                        textEmpty = true;
+                        Toast.makeText(getApplicationContext(), "At least one of the text inputs are empty", Toast.LENGTH_LONG).show();
+                    }
+                }
+                if (textEmpty) {
+                } else {
+                    for (int i = 0; i < structure.size(); i++) {
+                        if (Objects.equals(structure.get(i), "Check")) {
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(checks.get(checkCounter).getCheckString());
+                            checkCounter++;
+                        } else if (Objects.equals(structure.get(i), "Time")) {
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(timers.get(timerCounter).getTimeString());
+                            timerCounter++;
+                        } else if (Objects.equals(structure.get(i), "Edit")) {
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(edits.get(editCounter).getTextString());
+                            editCounter++;
+                        } else if (Objects.equals(structure.get(i), "Spinner")) {
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(spins.get(spinnerCounter).getChoiceString());
+                            spinnerCounter++;
+                        } else if (Objects.equals(structure.get(i), "Counter")) {
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(counters.get(counterCounter).getValString());
+                            counterCounter++;
+                        } else if (Objects.equals(structure.get(i), "Text")) {
+                        }
+                    }
+
+
+                    FileWriter writer = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
+                    writer.flush();
+                    writer.close();
+                    FileOutputStream out = new FileOutputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
+                    export.write(out);
+                    // now we have to save the file to data.xls phew more work.
+                    out.close();
+                    // now that we have successfully finished the conversion, we toast a message to the user telling them about our success
+                    Toast.makeText(getApplicationContext(), "Exported to " + getSupportActionBar().getTitle() + ".xls", Toast.LENGTH_SHORT).show();
+
+                }
+            } catch (IOException e) {
+
             }
-            export.getSheet("🚀").getRow(rowNumb).createCell(structure.size()+1).setCellValue(teamNumber);
-
-                FileWriter writer = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
-                writer.flush();
-                writer.close();
-                FileOutputStream out = new FileOutputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
-                export.write(out);
-                // now we have to save the file to data.xls phew more work.
-                out.close();
-                // now that we have successfully finished the conversion, we toast a message to the user telling them about our success
-                Toast.makeText(getApplicationContext(), "Exported to "+getSupportActionBar().getTitle()+".xls", Toast.LENGTH_SHORT).show();
-
-        }
-        }
-            catch (IOException e){
-
         }
     }
  }
