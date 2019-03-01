@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity  {
             game.close();
 
             FileWriter actList = new FileWriter(scout);
-
+            actList.append("Deep Space");
             actList.flush();
             actList.close();
 
