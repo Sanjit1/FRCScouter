@@ -126,7 +126,8 @@ public class MainActivity extends AppCompatActivity  {
 
             File defaultLayout = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"/ScouterAppData/ActivityData/Deep Space.🚀🤖");
             FileWriter game = new FileWriter(defaultLayout);
-            game
+            game.write("Deep Space");
+            game.write(System.lineSeparator());
             game.flush();
             game.close();
 
