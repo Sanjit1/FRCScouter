@@ -47,8 +47,12 @@ public class MainActivity extends AppCompatActivity  {
                 createDir(scout);
 
         File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
-        if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀");
+        if(!toCheck.exists()) {
+            Save(scout, "activity.🚀🤖🚀");
+            
 
+
+        }
     }
 
 
