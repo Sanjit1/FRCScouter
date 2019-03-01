@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity  {
 
         File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
         if(!toCheck.exists()) {
-            Save(scout, "activity.🚀🤖🚀");
-            
+           saveDefault();
 
 
         }
@@ -120,9 +119,14 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-    public void Save(File root, String childName){
+    public void saveDefault(){
         try
         {
+            scout, "activity.🚀🤖🚀"
+            File defaultLayout = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"/ScouterAppData/ActivityData/Deep Space.🚀🤖");
+            FileWriter writer = new FileWriter(defaultLayout);
+            writer.flush();
+            writer.close();
             if (!root.exists()) {
                 root.mkdirs();
             }
