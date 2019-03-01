@@ -122,18 +122,17 @@ public class MainActivity extends AppCompatActivity  {
     public void saveDefault(){
         try
         {
-            scout, "activity.🚀🤖🚀"
+            File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+
             File defaultLayout = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"/ScouterAppData/ActivityData/Deep Space.🚀🤖");
-            FileWriter writer = new FileWriter(defaultLayout);
-            writer.flush();
-            writer.close();
-            if (!root.exists()) {
-                root.mkdirs();
-            }
-            File gpxfile = new File(root, childName);
-            FileWriter writer = new FileWriter(gpxfile);
-            writer.flush();
-            writer.close();
+            FileWriter game = new FileWriter(defaultLayout);
+            // wright stuff
+            game.flush();
+            game.close();
+
+
+
+
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
         }
         catch(IOException e)
