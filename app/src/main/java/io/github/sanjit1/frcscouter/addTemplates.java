@@ -69,7 +69,7 @@ public class addTemplates extends AppCompatActivity {
         createDir(scout);
 
         File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
-        if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀");
+        if(!toCheck.exists())saveDefault();
     }
 
 
@@ -212,7 +212,7 @@ public class addTemplates extends AppCompatActivity {
                 timerViewHolder.addView(startStop);
                 timerLinearHolder.addView(timerViewHolder);
                 parentView.addView(timerLinearHolder);
-            break;
+                break;
 
             case  R.id.editTextFAB:
                 numberOfEditText++;
@@ -244,9 +244,9 @@ public class addTemplates extends AppCompatActivity {
                 spinnerNameHolder.addView(paramNameInput.get(paramNameInput.size()-1));
                 add.setLayoutParams(findViewById(R.id.referenceButton).getLayoutParams());
                 add.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v){
-                    spinnerViewHolder.addView(spinnerObjects.get(spinnerObjects.size()-1).addOptionListener());
-                }
+                    public void onClick(View v){
+                        spinnerViewHolder.addView(spinnerObjects.get(spinnerObjects.size()-1).addOptionListener());
+                    }
                 });
                 spinnerNameHolder.addView(add);
                 spinnerViewHolder.addView(spinnerNameHolder);
@@ -307,17 +307,77 @@ public class addTemplates extends AppCompatActivity {
         }
     }
 
-    public void Save(File root, String childName){
+
+
+    public void saveDefault(){
         try
         {
-            if (!root.exists()) {
-                root.mkdirs();
-            }
-            File gpxfile = new File(root, childName);
-            FileWriter writer = new FileWriter(gpxfile);
-            writer.append("");
-            writer.flush();
-            writer.close();
+            File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+
+            File defaultLayout = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"/ScouterAppData/ActivityData/Deep Space.🚀🤖");
+            FileWriter game = new FileWriter(defaultLayout);
+            game.write("Deep Space");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("Pre Game");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Pre Game");game.write(System.lineSeparator());
+            game.write("Spinner");game.write(System.lineSeparator());
+            game.write("Starting Position");game.write(System.lineSeparator());
+            game.write("Level 1 ");game.write(System.lineSeparator());
+            game.write("Level 2");game.write(System.lineSeparator());
+            game.write("endSpinner🤖🚀🤖🚀");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("Sandstorm");game.write(System.lineSeparator());
+            game.write("Check");game.write(System.lineSeparator());
+            game.write("Crossed Hab Line");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Rocket Lv1");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Rocket Lv2 & 3");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Ship");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Rocket Lv1");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Rocket Lv2 & 3");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Ship");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("Tele-Op");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Rocket Lv1");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Rocket Lv2 & 3");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Ship");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Rocket Lv1");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Rocket Lv2 & 3");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Ship");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("End Game");game.write(System.lineSeparator());
+            game.write("Spinner");game.write(System.lineSeparator());
+            game.write("HAB Level Climbed");game.write(System.lineSeparator());
+            game.write("Level1");game.write(System.lineSeparator());
+            game.write("Level2");game.write(System.lineSeparator());
+            game.write("Level3");game.write(System.lineSeparator());
+            game.write("endSpinner🤖🚀🤖🚀");game.write(System.lineSeparator());
+            game.write("EditText");game.write(System.lineSeparator());
+            game.write("Notes");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("endActivity🤖🚀🤖🚀");game.write(System.lineSeparator());
+            game.write("Destination Deep Space Scouting 2019");
+            game.flush();
+            game.close();
+
+            FileWriter actList = new FileWriter(scout);
+            actList.append("Deep Space");
+            actList.flush();
+            actList.close();
+
+
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
         }
         catch(IOException e)
@@ -326,6 +386,7 @@ public class addTemplates extends AppCompatActivity {
 
         }
     }
+
 
     public void save(View v){
 
@@ -387,51 +448,51 @@ public class addTemplates extends AppCompatActivity {
                     writer.append(System.lineSeparator());
                 }
                 else
-                    if(Objects.equals(structure.get(counter), "Time")) {
-                        writer.append("Time");
-                        writer.append(System.lineSeparator());
-                        writer.append(paramName.get(counter));
-                        writer.append(System.lineSeparator());
+                if(Objects.equals(structure.get(counter), "Time")) {
+                    writer.append("Time");
+                    writer.append(System.lineSeparator());
+                    writer.append(paramName.get(counter));
+                    writer.append(System.lineSeparator());
                 }
                 else
-                    if(Objects.equals(structure.get(counter), "EditText")) {
-                        writer.append("EditText");
-                        writer.append(System.lineSeparator());
-                        writer.append(paramName.get(counter));
-                        writer.append(System.lineSeparator());
-                        textInput.get(numOfEdit).setInputFromSpinner();
-                        writer.append(textInput.get(numOfEdit).getInputString());
-                        writer.append(System.lineSeparator());
-                        numOfEdit++;
+                if(Objects.equals(structure.get(counter), "EditText")) {
+                    writer.append("EditText");
+                    writer.append(System.lineSeparator());
+                    writer.append(paramName.get(counter));
+                    writer.append(System.lineSeparator());
+                    textInput.get(numOfEdit).setInputFromSpinner();
+                    writer.append(textInput.get(numOfEdit).getInputString());
+                    writer.append(System.lineSeparator());
+                    numOfEdit++;
                 }
                 else
-                    if(Objects.equals(structure.get(counter), "Spinner")) {
-                        writer.append("Spinner");
+                if(Objects.equals(structure.get(counter), "Spinner")) {
+                    writer.append("Spinner");
+                    writer.append(System.lineSeparator());
+                    writer.append(paramName.get(counter));
+                    writer.append(System.lineSeparator());
+                    spinnerObjects.get(numOfSpinner).convertEditTextToString();
+                    for(int spinCount = 0; spinCount<spinnerObjects.get(numOfSpinner).getOptions().size();spinCount++){
+                        writer.append(spinnerObjects.get(numOfSpinner).getOption(spinCount));
                         writer.append(System.lineSeparator());
-                        writer.append(paramName.get(counter));
-                        writer.append(System.lineSeparator());
-                        spinnerObjects.get(numOfSpinner).convertEditTextToString();
-                        for(int spinCount = 0; spinCount<spinnerObjects.get(numOfSpinner).getOptions().size();spinCount++){
-                            writer.append(spinnerObjects.get(numOfSpinner).getOption(spinCount));
-                            writer.append(System.lineSeparator());
-                        }
-                        numOfSpinner++;
-                        writer.append("endSpinner🤖🚀🤖🚀");
-                        writer.append(System.lineSeparator());
+                    }
+                    numOfSpinner++;
+                    writer.append("endSpinner🤖🚀🤖🚀");
+                    writer.append(System.lineSeparator());
                 }
                 else
-                    if(Objects.equals(structure.get(counter), "Counter")) {
-                        writer.append("Counter");
-                        writer.append(System.lineSeparator());
-                        writer.append(paramName.get(counter));
-                        writer.append(System.lineSeparator());
+                if(Objects.equals(structure.get(counter), "Counter")) {
+                    writer.append("Counter");
+                    writer.append(System.lineSeparator());
+                    writer.append(paramName.get(counter));
+                    writer.append(System.lineSeparator());
                 }
                 else
-                    if(Objects.equals(structure.get(counter), "Text")) {
-                        writer.append("Text");
-                        writer.append(System.lineSeparator());
-                        writer.append(paramName.get(counter));
-                        writer.append(System.lineSeparator());
+                if(Objects.equals(structure.get(counter), "Text")) {
+                    writer.append("Text");
+                    writer.append(System.lineSeparator());
+                    writer.append(paramName.get(counter));
+                    writer.append(System.lineSeparator());
                 }
             }
             writer.append("endActivity🤖🚀🤖🚀");

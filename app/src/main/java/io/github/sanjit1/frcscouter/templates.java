@@ -126,7 +126,7 @@ public class templates extends AppCompatActivity {
                             createDir(scout);
 
                             File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
-                            if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀"); }
+                            if(!toCheck.exists())saveDefault();}
 
                         File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/cache"));
 
@@ -250,7 +250,7 @@ public class templates extends AppCompatActivity {
                             createDir(scout);
 
                             File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
-                            if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀"); }
+                            if(!toCheck.exists())saveDefault(); }
 
                         File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/cache"));
 
@@ -286,16 +286,76 @@ public class templates extends AppCompatActivity {
         }
     }
 
-    public void Save(File root, String childName){
+
+    public void saveDefault(){
         try
         {
-            if (!root.exists()) {
-                root.mkdirs();
-            }
-            File gpxfile = new File(root, childName);
-            FileWriter writer = new FileWriter(gpxfile);
-            writer.flush();
-            writer.close();
+            File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+
+            File defaultLayout = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"/ScouterAppData/ActivityData/Deep Space.🚀🤖");
+            FileWriter game = new FileWriter(defaultLayout);
+            game.write("Deep Space");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("Pre Game");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Pre Game");game.write(System.lineSeparator());
+            game.write("Spinner");game.write(System.lineSeparator());
+            game.write("Starting Position");game.write(System.lineSeparator());
+            game.write("Level 1 ");game.write(System.lineSeparator());
+            game.write("Level 2");game.write(System.lineSeparator());
+            game.write("endSpinner🤖🚀🤖🚀");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("Sandstorm");game.write(System.lineSeparator());
+            game.write("Check");game.write(System.lineSeparator());
+            game.write("Crossed Hab Line");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Rocket Lv1");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Rocket Lv2 & 3");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Ship");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Rocket Lv1");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Rocket Lv2 & 3");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Ship");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("Tele-Op");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Rocket Lv1");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Rocket Lv2 & 3");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Hatch Ship");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Rocket Lv1");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Rocket Lv2 & 3");game.write(System.lineSeparator());
+            game.write("Counter");game.write(System.lineSeparator());
+            game.write("Cargo Ship");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("End Game");game.write(System.lineSeparator());
+            game.write("Spinner");game.write(System.lineSeparator());
+            game.write("HAB Level Climbed");game.write(System.lineSeparator());
+            game.write("Level1");game.write(System.lineSeparator());
+            game.write("Level2");game.write(System.lineSeparator());
+            game.write("Level3");game.write(System.lineSeparator());
+            game.write("endSpinner🤖🚀🤖🚀");game.write(System.lineSeparator());
+            game.write("EditText");game.write(System.lineSeparator());
+            game.write("Notes");game.write(System.lineSeparator());
+            game.write("Text");game.write(System.lineSeparator());
+            game.write("endActivity🤖🚀🤖🚀");game.write(System.lineSeparator());
+            game.write("Destination Deep Space Scouting 2019");
+            game.flush();
+            game.close();
+
+            FileWriter actList = new FileWriter(scout);
+            actList.append("Deep Space");
+            actList.flush();
+            actList.close();
+
+
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
         }
         catch(IOException e)
@@ -306,8 +366,7 @@ public class templates extends AppCompatActivity {
     }
 
 
-
-    public void onBackPressed(){
+        public void onBackPressed(){
         File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData");
         if (!scout.exists()){
             createDir(scout);
@@ -315,7 +374,7 @@ public class templates extends AppCompatActivity {
             createDir(scout);
 
             File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
-            if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀");}
+            if(!toCheck.exists())saveDefault();}
         Intent myIntent = new Intent(this,
                 MainActivity.class);
         startActivity(myIntent);
@@ -329,7 +388,7 @@ public class templates extends AppCompatActivity {
             createDir(scout);
 
             File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
-            if(!toCheck.exists())Save(scout,"activity.🚀🤖🚀"); }
+            if(!toCheck.exists()) saveDefault(); }
         if (button==findViewById(R.id.add)){
             Intent myIntent = new Intent(templates.this,
                     addTemplates.class);
