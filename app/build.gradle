@@ -21,10 +21,14 @@ android {
         }
     }
 
-    dataBindind
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
+    implementation 'com.heinrichreimersoftware:material-intro:1.6.2'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
     implementation 'com.github.clans:fab:1.6.4'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
