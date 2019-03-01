@@ -437,7 +437,7 @@ public class addTemplates extends AppCompatActivity {
             writer.append("endActivity🤖🚀🤖🚀");
             EditText description = findViewById(R.id.description);
             writer.append(System.lineSeparator());
-            if(description.getText().toString()== null) description.setText(" ");
+            if(description.getText().toString()== null) description.setText("No description");
             writer.append(description.getText().toString());
             writer.flush();
             writer.close();
