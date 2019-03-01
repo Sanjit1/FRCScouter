@@ -20,10 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBindind
 }
 
 dependencies {
-    implementation 'agency.tango.android:material-intro-screen:0.0.05'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
     implementation 'com.github.clans:fab:1.6.4'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
