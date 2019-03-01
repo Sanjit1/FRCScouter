@@ -126,11 +126,14 @@ public class MainActivity extends AppCompatActivity  {
 
             File defaultLayout = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"/ScouterAppData/ActivityData/Deep Space.🚀🤖");
             FileWriter game = new FileWriter(defaultLayout);
-            // wright stuff
+            game
             game.flush();
             game.close();
 
+            FileWriter actList = new FileWriter(scout);
 
+            actList.flush();
+            actList.close();
 
 
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
