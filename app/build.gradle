@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    implementation 'agency.tango.android:material-intro-screen:{latest_release}'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
     implementation 'com.github.clans:fab:1.6.4'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
