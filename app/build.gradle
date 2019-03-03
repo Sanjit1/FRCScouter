@@ -7,11 +7,11 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "io.github.sanjit1.frcscouter"
+        applicationId 'io.github.sanjit1.frcscouting'
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.5"
+        versionCode 1
+        versionName '1.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,11 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     dataBinding {
         enabled = true
     }
-
+    productFlavors {
+    }
 }
 
 dependencies {
