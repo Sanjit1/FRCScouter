@@ -54,7 +54,7 @@ public class templates extends AppCompatActivity {
 
 
 
-            for ( int numb = 1; numb<arrOfStr.length;numb++ ){
+            for ( int numb = 0; numb<arrOfStr.length;numb++ ){
                 FileReader activity = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/ActivityData/"+arrOfStr[numb]+".🚀🤖");
                 BufferedReader b = new BufferedReader(activity);
                 StringBuilder s = new StringBuilder();
@@ -290,7 +290,7 @@ public class templates extends AppCompatActivity {
     public void saveDefault(){
         try
         {
-            File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData");
+            File scout = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
 
             File defaultLayout = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"/ScouterAppData/ActivityData/Deep Space.🚀🤖");
             FileWriter game = new FileWriter(defaultLayout);
