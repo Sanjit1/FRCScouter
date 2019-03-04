@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            Toast.makeText(this, "Restart app to use it after giving permissions", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
             }, 1);
