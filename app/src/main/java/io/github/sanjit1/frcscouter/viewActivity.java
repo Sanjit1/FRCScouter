@@ -1,7 +1,6 @@
 package io.github.sanjit1.frcscouter;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -106,6 +105,9 @@ Workbook export;
 
     public class checkBoxObject{
         CardView holder = new CardView(getApplicationContext());
+        //holder.setUseCompatPadding(true);
+        //holder.setLayoutParams(tempCard.getLayoutParams());
+        //holder.setCardElevation(5);
         LinearLayout checkAndText = new LinearLayout(getApplicationContext());
         TextView paramName = new TextView(getApplicationContext());
         CheckBox param = new CheckBox(getApplicationContext());
@@ -244,7 +246,7 @@ Workbook export;
         int val = 0;
         public counterObject(String name){
             paramName.setText(name);
-            paramName.setTextSize(24);
+            paramName.setTextSize(21);
             paramName.setGravity(Gravity.CENTER);
             increment.setLayoutParams(reff.getLayoutParams());
             increment.setText("+");
@@ -288,7 +290,7 @@ Workbook export;
 
         public textObject(String name){
             text.setText(name);
-            text.setTextSize(21);
+            text.setTextSize(24);
             textHolder.addView(text);
             holder.addView(textHolder);
             parent.addView(holder);
