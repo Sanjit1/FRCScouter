@@ -30,13 +30,52 @@
                 android:ems="10"
                 android:hint="Team Number"
                 android:inputType="number" />
-            <Button
-                android:id="@+id/reference"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="@color/colorSecondary"
-                android:visibility="gone"/>
+                android:id="@+id/templateCard"
+                app:cardPreventCornerOverlap="false"
+                card_view:cardCornerRadius="10dp">
+
+
+                <Button
+                    android:id="@+id/reference"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:visibility="gone"/>
+
+            </android.support.v7.widget.CardView>
+
+
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:id="@+id/templateCardText"
+                app:cardElevation="5dp"
+                app:cardPreventCornerOverlap="false"
+                card_view:cardCornerRadius="10dp">
+
+
+                <Button
+                    android:id="@+id/reference2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:visibility="gone"/>
+
+            </android.support.v7.widget.CardView>
+
+
+
 
 
 

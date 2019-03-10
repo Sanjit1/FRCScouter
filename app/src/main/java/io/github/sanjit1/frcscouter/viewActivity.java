@@ -103,16 +103,17 @@ Workbook export;
 
 //                                        Object declaration begins here
 
-    public class checkBoxObject{
+    public class checkBoxObject {
+        CardView tempCard = findViewById(R.id.templateCard);
         CardView holder = new CardView(getApplicationContext());
-        //holder.setUseCompatPadding(true);
-        //holder.setLayoutParams(tempCard.getLayoutParams());
-        //holder.setCardElevation(5);
         LinearLayout checkAndText = new LinearLayout(getApplicationContext());
         TextView paramName = new TextView(getApplicationContext());
         CheckBox param = new CheckBox(getApplicationContext());
 
         public checkBoxObject(String name){
+            holder.setUseCompatPadding(true);
+            holder.setLayoutParams(tempCard.getLayoutParams());
+            holder.setCardElevation(5);
             paramName.setText(name);
             paramName.setTextSize(21);
             checkAndText.addView(param);
@@ -140,6 +141,7 @@ Workbook export;
 
 
     public class timerObject{
+        CardView tempCard = findViewById(R.id.templateCard);
         CardView holder = new CardView(getApplicationContext());
         LinearLayout timerAndText = new LinearLayout(getApplicationContext());
         TextView paramName = new TextView(getApplicationContext());
@@ -151,6 +153,9 @@ Workbook export;
         int intSeconds = 0;
 
         public timerObject(String name){
+            holder.setUseCompatPadding(true);
+            holder.setLayoutParams(tempCard.getLayoutParams());
+            holder.setCardElevation(5);
             paramName.setText(name);
             paramName.setTextSize(21);
             paramName.setGravity(Gravity.CENTER);
@@ -195,11 +200,16 @@ Workbook export;
 
 
     public class editTextObject{
+        CardView tempCard = findViewById(R.id.templateCard);
         CardView holder = new CardView(getApplicationContext());
         LinearLayout text = new LinearLayout(getApplicationContext());
         EditText param = new EditText(getApplicationContext());
 
         public editTextObject(String name,String type){
+            holder.setUseCompatPadding(true);
+            holder.setLayoutParams(tempCard.getLayoutParams());
+            holder.setCardElevation(5);
+
             param.setHint(name);
             param.setInputType(Objects.equals(type,"Text")? InputType.TYPE_CLASS_TEXT:InputType.TYPE_CLASS_NUMBER);
             text.addView(param);
@@ -216,11 +226,15 @@ Workbook export;
 
 
     public class spinnerObject{
+        CardView tempCard = findViewById(R.id.templateCard);
         CardView holder = new CardView(getApplicationContext());
         LinearLayout spinnerHolder = new LinearLayout(getApplicationContext());
         TextView paramName = new TextView(getApplicationContext());
         Spinner options = new Spinner(getApplicationContext());
         public spinnerObject(String name, ArrayList<String> listOfElements){
+            holder.setUseCompatPadding(true);
+            holder.setLayoutParams(tempCard.getLayoutParams());
+            holder.setCardElevation(5);
             paramName.setText(name);
             paramName.setTextSize(21);
             options.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item,listOfElements));
@@ -237,6 +251,7 @@ Workbook export;
     }
 
     public class counterObject{
+        CardView tempCard = findViewById(R.id.templateCard);
         CardView holder = new CardView(getApplicationContext());
         LinearLayout text = new LinearLayout(getApplicationContext());
         TextView paramName = new TextView(getApplicationContext());
@@ -245,6 +260,9 @@ Workbook export;
         Button decrement = new Button(getApplicationContext());
         int val = 0;
         public counterObject(String name){
+            holder.setUseCompatPadding(true);
+            holder.setLayoutParams(tempCard.getLayoutParams());
+            holder.setCardElevation(5);
             paramName.setText(name);
             paramName.setTextSize(21);
             paramName.setGravity(Gravity.CENTER);
@@ -284,12 +302,17 @@ Workbook export;
     }
 
     public class textObject{
+        CardView tempCard = findViewById(R.id.templateCardText);
         CardView holder = new CardView(getApplicationContext());
         LinearLayout textHolder = new LinearLayout(getApplicationContext());
         TextView text = new TextView(getApplicationContext());
 
         public textObject(String name){
+            holder.setUseCompatPadding(true);
+            holder.setLayoutParams(tempCard.getLayoutParams());
+            holder.setCardElevation(5);
             text.setText(name);
+            text
             text.setTextSize(24);
             textHolder.addView(text);
             holder.addView(textHolder);
