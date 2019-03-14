@@ -53,7 +53,6 @@ public class search extends AppCompatActivity {
             }
 
             for(int c = 0; c<teams.size(); c++){
-                final int counter = c;
                 CardView layoutHolder = new CardView(this);
                 CardView ref = findViewById(R.id.refCard);
                 LinearLayout textHolder = new LinearLayout(this);
