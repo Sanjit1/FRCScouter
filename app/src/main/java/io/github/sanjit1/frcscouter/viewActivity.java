@@ -312,7 +312,6 @@ Workbook export;
             holder.setLayoutParams(tempCard.getLayoutParams());
             holder.setCardElevation(5);
             text.setText(name);
-            text
             text.setTextSize(24);
             textHolder.addView(text);
             holder.addView(textHolder);
