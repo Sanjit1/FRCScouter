@@ -538,6 +538,8 @@ Workbook export;
                     if(!teamScouts.exists()){
                         FileWriter templatesUsed = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
                         templatesUsed.append(getSupportActionBar().getTitle());
+                        teamNumbsNew.flush();
+                        teamNumbsNew.close();
                     }else{
                         String[] arrayOfStr;
                         FileReader templatesList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
