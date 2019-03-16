@@ -486,27 +486,8 @@ Workbook export;
                     numbers.append(teamNumber);
                     numbers.flush();
                     numbers.close();
-                    String[] arrayOfStr;
-                    FileReader templatesList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
-                    BufferedReader br1 = new BufferedReader(templatesList);
-                    StringBuilder sb1 = new StringBuilder();
-                    String line1 = br1.readLine();
-
-                    while (line1 != null) {
-                        sb1.append(line1).append("\n");
-                        line1 = br1.readLine();
-                    }
-                    String fileAsString1 = sb1.toString();
-                    arrayOfStr = fileAsString1.split(System.lineSeparator(), 0);
-
-
-
                     FileWriter templatesNew = new FileWriter(teamScouts);
-                    for (int i = 0; i < arrayOfStr.length; i++) {
-                        templatesNew.append(arrayOfStr[i]);
-                        templatesNew.append(System.lineSeparator());
-                    }
-                    if(!Arrays.asList(arrayOfStr).contains(getSupportActionBar().getTitle())) templatesNew.append(getSupportActionBar().getTitle());
+                    templatesNew.append(getSupportActionBar().getTitle());
                     templatesNew.flush();
                     templatesNew.close();
                 }else{
@@ -531,15 +512,14 @@ Workbook export;
                         teamNumbsNew.append(System.lineSeparator());
                     }
                     if(!Arrays.asList(arrOfStr).contains(teamNumber)) teamNumbsNew.append(teamNumber);
-
                     teamNumbsNew.flush();
                     teamNumbsNew.close();
 
                     if(!teamScouts.exists()){
                         FileWriter templatesUsed = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
                         templatesUsed.append(getSupportActionBar().getTitle());
-                        teamNumbsNew.flush();
-                        teamNumbsNew.close();
+                        templatesUsed.flush();
+                        templatesUsed.close();
                     }else{
                         String[] arrayOfStr;
                         FileReader templatesList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
