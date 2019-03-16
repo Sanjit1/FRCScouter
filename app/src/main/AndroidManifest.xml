@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Teams"
+            android:label="@string/title_activity_teams"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".About"
             android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".search" />
         <activity
             android:name=".viewActivity"
