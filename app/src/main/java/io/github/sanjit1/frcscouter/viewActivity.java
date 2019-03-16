@@ -35,6 +35,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import static java.lang.Math.round;
@@ -371,6 +372,18 @@ Workbook export;
     }
 
 
+    public void createDir(File scout){
+        if (!scout.exists() && !scout.isDirectory()) {
+            // create empty directory
+            if (scout.mkdirs()) {
+                Log.i("CreateDir", "App dir created");
+            }
+        } else {
+            Log.i("CreateDir", "App dir already exists");
+        }
+    }
+
+
 
     public void export(View v) {
         if (input.getText() == null) {
@@ -459,13 +472,120 @@ Workbook export;
 
 
             try {
+                //create files for storing saved paths and stuff like that
+                File teamNumbers = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/ScouterAppData/teamData/"));
+                File teamScouts = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/ScouterAppData/teamData/" + teamNumber ));
+                createDir(teamNumbers);
+                createDir(teamScouts);
+
+                teamNumbers = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/ScouterAppData/teamData/teams.hi"));
+                teamScouts = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
+
+                if(!teamNumbers.exists()){
+                    FileWriter numbers = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/teams.hi" ));
+                    numbers.append(teamNumber);
+                    numbers.flush();
+                    numbers.close();
+                    String[] arrayOfStr;
+                    FileReader templatesList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
+                    BufferedReader br1 = new BufferedReader(templatesList);
+                    StringBuilder sb1 = new StringBuilder();
+                    String line1 = br1.readLine();
+
+                    while (line1 != null) {
+                        sb1.append(line1).append("\n");
+                        line1 = br1.readLine();
+                    }
+                    String fileAsString1 = sb1.toString();
+                    arrayOfStr = fileAsString1.split(System.lineSeparator(), 0);
+
+
+
+                    FileWriter templatesNew = new FileWriter(teamScouts);
+                    for (int i = 0; i < arrayOfStr.length; i++) {
+                        templatesNew.append(arrayOfStr[i]);
+                        templatesNew.append(System.lineSeparator());
+                    }
+                    if(!Arrays.asList(arrayOfStr).contains(getSupportActionBar().getTitle())) templatesNew.append(getSupportActionBar().getTitle());
+                    templatesNew.flush();
+                    templatesNew.close();
+                }else{
+                    String[] arrOfStr;
+                    FileReader numbersList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/teamData/teams.hi");
+                    BufferedReader br = new BufferedReader(numbersList);
+                    StringBuilder sb = new StringBuilder();
+                    String line = br.readLine();
+
+                    while (line != null) {
+                        sb.append(line).append("\n");
+                        line = br.readLine();
+                    }
+                    String fileAsString = sb.toString();
+                    arrOfStr = fileAsString.split(System.lineSeparator(), 0);
+
+
+
+                    FileWriter teamNumbsNew = new FileWriter(teamNumbers);
+                    for (int i = 0; i < arrOfStr.length; i++) {
+                        teamNumbsNew.append(arrOfStr[i]);
+                        teamNumbsNew.append(System.lineSeparator());
+                    }
+                    if(!Arrays.asList(arrOfStr).contains(teamNumber)) teamNumbsNew.append(teamNumber);
+
+                    teamNumbsNew.flush();
+                    teamNumbsNew.close();
+
+                    if(!teamScouts.exists()){
+                        FileWriter templatesUsed = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
+                        templatesUsed.append(getSupportActionBar().getTitle());
+                    }else{
+                        String[] arrayOfStr;
+                        FileReader templatesList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/" + teamNumber + "/templatesUsed.hi"));
+                        BufferedReader br1 = new BufferedReader(templatesList);
+                        StringBuilder sb1 = new StringBuilder();
+                        String line1 = br1.readLine();
+
+                        while (line1 != null) {
+                            sb1.append(line1).append("\n");
+                            line1 = br1.readLine();
+                        }
+                        String fileAsString1 = sb1.toString();
+                        arrayOfStr = fileAsString1.split(System.lineSeparator(), 0);
+
+
+
+                        FileWriter templatesNew = new FileWriter(teamScouts);
+                        for (int i = 0; i < arrayOfStr.length; i++) {
+                            templatesNew.append(arrayOfStr[i]);
+                            templatesNew.append(System.lineSeparator());
+                        }
+                        if(!Arrays.asList(arrayOfStr).contains(getSupportActionBar().getTitle())) templatesNew.append(getSupportActionBar().getTitle());
+                        templatesNew.flush();
+                        templatesNew.close();
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 int checkCounter = 0;
                 int timerCounter = 0;
                 int editCounter = 0;
                 int spinnerCounter = 0;
                 int counterCounter = 0;
 
-                File xls = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/ScouterAppData/teamData"+ teamNumber + "/" + getSupportActionBar().getTitle() + ".xls"));
+                File xls = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).getAbsoluteFile(), ("/ScouterAppData/teamData/"+ teamNumber + "/" + getSupportActionBar().getTitle() + ".xls"));
                 int rowNumb = 0;
 
                 if (!xls.exists()) {
@@ -476,7 +596,7 @@ Workbook export;
                         export.getSheetAt(0).getRow(0).createCell(i).setCellValue(paramName.get(i));
                     }
                 } else {
-                    InputStream ExcelFileToRead = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData"+ teamNumber + "/" + getSupportActionBar().getTitle() + ".xls"));
+                    InputStream ExcelFileToRead = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/"+ teamNumber + "/" + getSupportActionBar().getTitle() + ".xls"));
                     export = new HSSFWorkbook(ExcelFileToRead);
                 }
 
@@ -484,7 +604,6 @@ Workbook export;
                     rowNumb++;
                 }
                 export.getSheetAt(0).createRow(rowNumb);
-                export.getSheet("🚀").getRow(rowNumb).createCell(0).setCellValue(teamNumber);
                 boolean textEmpty = false;
                 for (int texCheck = 0; texCheck < edits.size(); texCheck++) {
                     if (TextUtils.isEmpty(edits.get(texCheck).getTextString())) {
@@ -496,29 +615,29 @@ Workbook export;
                 } else {
                     for (int i = 0; i < structure.size(); i++) {
                         if (Objects.equals(structure.get(i), "Check")) {
-                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(checks.get(checkCounter).getCheckString());
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(checks.get(checkCounter).getCheckString());
                             checkCounter++;
                         } else if (Objects.equals(structure.get(i), "Time")) {
-                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(timers.get(timerCounter).getTimeString());
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(timers.get(timerCounter).getTimeString());
                             timerCounter++;
                         } else if (Objects.equals(structure.get(i), "Edit")) {
-                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(edits.get(editCounter).getTextString());
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(edits.get(editCounter).getTextString());
                             editCounter++;
                         } else if (Objects.equals(structure.get(i), "Spinner")) {
-                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(spins.get(spinnerCounter).getChoiceString());
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(spins.get(spinnerCounter).getChoiceString());
                             spinnerCounter++;
                         } else if (Objects.equals(structure.get(i), "Counter")) {
-                            export.getSheet("🚀").getRow(rowNumb).createCell(i+1).setCellValue(counters.get(counterCounter).getValString());
+                            export.getSheet("🚀").getRow(rowNumb).createCell(i).setCellValue(counters.get(counterCounter).getValString());
                             counterCounter++;
                         } else if (Objects.equals(structure.get(i), "Text")) {
                         }
                     }
 
 
-                    FileWriter writer = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
+                    FileWriter writer = new FileWriter((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/"+ teamNumber + "/" + getSupportActionBar().getTitle() + ".xls"));
                     writer.flush();
                     writer.close();
-                    FileOutputStream out = new FileOutputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/" + getSupportActionBar().getTitle() + ".xls"));
+                    FileOutputStream out = new FileOutputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/"+ teamNumber + "/" + getSupportActionBar().getTitle() + ".xls"));
                     export.write(out);
                     // now we have to save the file to data.xls phew more work.
                     out.close();
