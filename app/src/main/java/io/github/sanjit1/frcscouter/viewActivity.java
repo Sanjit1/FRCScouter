@@ -554,13 +554,6 @@ Workbook export;
 
 
 
-
-
-
-
-
-
-
                 int checkCounter = 0;
                 int timerCounter = 0;
                 int editCounter = 0;
