@@ -35,6 +35,17 @@
                 android:text="@string/templates" />
 
 
+            <Button
+                android:id="@+id/teams"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorSecondary"
+                android:capitalize="none"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="@string/title_activity_teams" />
+
+
         </LinearLayout>
 
 
