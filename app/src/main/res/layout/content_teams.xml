@@ -8,7 +8,6 @@
     tools:context="io.github.sanjit1.frcscouter.teams"
     tools:showIn="@layout/activity_teams">
 
-    <?xml version="1.0" encoding="utf-8"?>
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

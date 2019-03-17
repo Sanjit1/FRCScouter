@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity  {
 
         if (button==findViewById(R.id.templates)){
             Intent myIntent = new Intent(MainActivity.this,
-                    templates.class);
+                    teams.class);
             startActivity(myIntent);
         } else {
             Intent myIntent = new Intent(MainActivity.this,
