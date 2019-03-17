@@ -492,7 +492,7 @@ Workbook export;
                     templatesNew.close();
                 }else{
                     String[] arrOfStr;
-                    FileReader numbersList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/teamData/teams.hi");
+                    FileReader numbersList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/teams.hi"));
                     BufferedReader br = new BufferedReader(numbersList);
                     StringBuilder sb = new StringBuilder();
                     String line = br.readLine();
