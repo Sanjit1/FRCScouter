@@ -58,11 +58,6 @@ public class teams extends AppCompatActivity {
                 CardView layoutHolder = new CardView(this);
                 CardView ref = findViewById(R.id.refCard);
                 LinearLayout trashAndOthers = new LinearLayout(this);
-                Button trash = new Button(this);
-                trash.setLayoutParams(findViewById(R.id.reference).getLayoutParams());
-                trash.setBackground(getDrawable(R.drawable.ic_delete_black_24dp));
-                trash.setGravity(Gravity.END | Gravity.CENTER);
-                trashAndOthers.setGravity(Gravity.LEFT | Gravity.CENTER);
                 layoutHolder.setLayoutParams(ref.getLayoutParams());
                 LinearLayout textHolder = new LinearLayout(this);
                 textHolder.setOrientation(LinearLayout.VERTICAL);
@@ -77,7 +72,6 @@ public class teams extends AppCompatActivity {
                 textHolder.addView(description);
                 textHolder.setWeightSum(1);
                 trashAndOthers.addView(textHolder);
-                trashAndOthers.addView(trash);
                 layoutHolder.addView(trashAndOthers);
                 parent.addView(layoutHolder);
                 layoutHolder.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +87,7 @@ public class teams extends AppCompatActivity {
                             File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
                             if(!toCheck.exists())saveDefault();}
 
-                        File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/ActivityData/cache"));
+                        File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/cache"));
 
                         try{
                             FileWriter writer = new FileWriter(activityFile);
@@ -101,9 +95,10 @@ public class teams extends AppCompatActivity {
                             writer.flush();
                             writer.close();
                             Intent myIntent = new Intent(getApplicationContext(),
-                                    viewActivity.class);
+                                    viewTeams.class);
                             startActivity(myIntent);
                         } catch (IOException e){}
+
 
                     }
                 });
@@ -124,7 +119,7 @@ public class teams extends AppCompatActivity {
 
         LinearLayout parent = findViewById(R.id.parent);
         try{
-            FileReader activityList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
+            FileReader activityList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/teamData/cache");
             BufferedReader br = new BufferedReader(activityList);
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -140,25 +135,13 @@ public class teams extends AppCompatActivity {
 
 
 
-            for ( int numb = 1; numb<arrOfStr.length;numb++ ){
-                FileReader activity = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/ActivityData/"+arrOfStr[numb]+".🚀🤖");
-                BufferedReader b = new BufferedReader(activity);
-                StringBuilder s = new StringBuilder();
-                String lin = b.readLine();
-                while (lin != null) {
-                    s.append(lin).append("\n");
-                    lin = b.readLine();
-                }
+            for ( int numb = 0; numb<arrOfStr.length;numb++ ){
 
-                String fi = s.toString();
-                String[] arr = fi.split(System.lineSeparator(), 0);
-                String desc = arr[arr.length-1];
 
                 final int number = numb;
                 CardView layoutHolder = new CardView(this);
                 CardView ref = findViewById(R.id.refCard);
                 LinearLayout trashAndOthers = new LinearLayout(this);
-                trashAndOthers.setGravity(Gravity.LEFT | Gravity.CENTER);
                 layoutHolder.setLayoutParams(ref.getLayoutParams());
                 LinearLayout textHolder = new LinearLayout(this);
                 textHolder.setOrientation(LinearLayout.VERTICAL);
@@ -167,7 +150,7 @@ public class teams extends AppCompatActivity {
                 TextView description = new TextView(this);
                 name.setText(arrOfStr[numb]);
                 description.setMaxLines(2);
-                description.setText(desc);
+                description.setText("Some description");
                 description.setTextSize(17);
                 textHolder.addView(name);
                 textHolder.addView(description);
@@ -186,7 +169,7 @@ public class teams extends AppCompatActivity {
                             createDir(scout);
 
                             File toCheck = new File((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + "/ScouterAppData/ActivityData/activity.🚀🤖🚀");
-                            if(!toCheck.exists())saveDefault(); }
+                            if(!toCheck.exists())saveDefault();}
 
                         File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/cache"));
 
@@ -199,6 +182,7 @@ public class teams extends AppCompatActivity {
                                     viewTeams.class);
                             startActivity(myIntent);
                         } catch (IOException e){}
+
 
                     }
                 });
