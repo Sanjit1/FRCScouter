@@ -119,8 +119,8 @@ public class teams extends AppCompatActivity {
 
         LinearLayout parent = findViewById(R.id.parent);
         try{
-            FileReader activityList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/teamData/cache");
-            BufferedReader br = new BufferedReader(activityList);
+            FileReader teamList = new FileReader ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/teams.hi"));
+            BufferedReader br = new BufferedReader(teamList);
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
@@ -191,6 +191,7 @@ public class teams extends AppCompatActivity {
         } catch(IOException e){
             // You are toast!!
         }
+
 
 
     }
