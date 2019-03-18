@@ -1,6 +1,9 @@
 package io.github.sanjit1.frcscouter;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +13,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +59,9 @@ public class teams extends AppCompatActivity {
                 final int number = numb;
                 CardView layoutHolder = new CardView(this);
                 CardView ref = findViewById(R.id.refCard);
+                ImageView avatar = new ImageView(this);
                 LinearLayout picAndOthers = new LinearLayout(this);
+                picAndOthers.setOrientation(LinearLayout.HORIZONTAL);
                 LinearLayout trashAndOthers = new LinearLayout(this);
                 layoutHolder.setLayoutParams(ref.getLayoutParams());
                 LinearLayout textHolder = new LinearLayout(this);
@@ -71,7 +77,9 @@ public class teams extends AppCompatActivity {
                 textHolder.addView(description);
                 textHolder.setWeightSum(1);
                 trashAndOthers.addView(textHolder);
-                layoutHolder.addView(trashAndOthers);
+                picAndOthers.addView(trashAndOthers);
+                picAndOthers.addView(avatar);
+                layoutHolder.addView(picAndOthers);
                 parent.addView(layoutHolder);
                 layoutHolder.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
