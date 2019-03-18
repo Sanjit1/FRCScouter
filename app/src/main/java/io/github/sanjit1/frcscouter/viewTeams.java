@@ -7,6 +7,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -34,7 +37,8 @@ String teamNumber ;
             String fAsString = stringB.toString();
             String[] arrayOfStr = fAsString.split(System.lineSeparator(), 0);
             teamNumber = arrayOfStr[0];
-
+            TextView teams = findViewById(R.id.teamNumb);
+            teams.setText(teamNumber);
 
         } catch (IOException e){}
     }
