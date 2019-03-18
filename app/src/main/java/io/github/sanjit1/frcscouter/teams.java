@@ -52,11 +52,10 @@ public class teams extends AppCompatActivity {
 
 
             for ( int numb = 0; numb<arrOfStr.length;numb++ ){
-
-
                 final int number = numb;
                 CardView layoutHolder = new CardView(this);
                 CardView ref = findViewById(R.id.refCard);
+                LinearLayout picAndOthers = new LinearLayout(this);
                 LinearLayout trashAndOthers = new LinearLayout(this);
                 layoutHolder.setLayoutParams(ref.getLayoutParams());
                 LinearLayout textHolder = new LinearLayout(this);
