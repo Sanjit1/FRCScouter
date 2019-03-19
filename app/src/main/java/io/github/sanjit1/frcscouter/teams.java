@@ -23,6 +23,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -56,6 +60,40 @@ public class teams extends AppCompatActivity {
 
 
             for ( int numb = 0; numb<arrOfStr.length;numb++ ){
+                /*curl
+                -X GET "https://www.thebluealliance.com/api/v3/team/frc2658"
+                -H "accept: application/json"
+                -H "X-TBA-Auth-Key: "
+                 */
+
+                //URL url = new URL("https://www.thebluealliance.com/api/v3/team/frc2658");
+
+                try {
+                    String key = "";
+                    String url = "https://www.thebluealliance.com/api/v3/team/frc2658";
+
+                    URL obj = new URL(url);
+                    HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    conn.setRequestProperty("X-TBA-Auth-Key",key;
+                    conn.setDoOutput(true);
+
+                    conn.setRequestMethod("PUT");
+
+
+
+                    String data =  "{\"format\":\"json\",\"pattern\":\"#\"}";
+                    OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                    out.write(data);
+                    out.close();
+
+                    new InputStreamReader(conn.getInputStream());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 final int number = numb;
                 CardView layoutHolder = new CardView(this);
                 CardView ref = findViewById(R.id.refCard);
