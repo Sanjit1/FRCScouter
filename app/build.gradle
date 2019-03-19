@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+
     implementation 'com.heinrichreimersoftware:material-intro:1.6.2'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
     implementation 'com.github.clans:fab:1.6.4'
@@ -44,4 +45,5 @@ dependencies {
     implementation files('libs/poi-ooxml-schemas-4.0.1.jar')
     implementation files('libs/poi-scratchpad-4.0.1.jar')
     implementation 'com.android.support:recyclerview-v7:28.0.0-rc02'
+    implementation files('libs/TBA-APIv3-Java-Library-2.0.jar')
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thebluealliance.api.v3.TBA;
+import com.thebluealliance.api.v3.models.Event;
+import com.thebluealliance.api.v3.models.Team;
+import com.thebluealliance.api.v3.requests.DataRequest;
+import com.thebluealliance.api.v3.requests.TeamRequest;
+
+import org.apache.poi.util.IOUtils;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -25,6 +35,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,39 +71,13 @@ public class teams extends AppCompatActivity {
 
 
             for ( int numb = 0; numb<arrOfStr.length;numb++ ){
-                /*curl
-                -X GET "https://www.thebluealliance.com/api/v3/team/frc2658"
-                -H "accept: application/json"
-                -H "X-TBA-Auth-Key: "
-                 */
 
-                //URL url = new URL("https://www.thebluealliance.com/api/v3/team/frc2658");
+                TBA tba = new TBA("key");
+                Team robot = new Team();
+                TeamRequest c = tba.teamRequest;
+                Event[] e = c.getEvents(2658);
+                robot = c.getTeam(2658);
 
-                try {
-                    String key = "";
-                    String url = "https://www.thebluealliance.com/api/v3/team/frc2658";
-
-                    URL obj = new URL(url);
-                    HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    conn.setRequestProperty("X-TBA-Auth-Key",key;
-                    conn.setDoOutput(true);
-
-                    conn.setRequestMethod("PUT");
-
-
-
-                    String data =  "{\"format\":\"json\",\"pattern\":\"#\"}";
-                    OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
-                    out.write(data);
-                    out.close();
-
-                    new InputStreamReader(conn.getInputStream());
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
                 final int number = numb;
                 CardView layoutHolder = new CardView(this);
@@ -109,7 +94,7 @@ public class teams extends AppCompatActivity {
                 TextView description = new TextView(this);
                 name.setText(arrOfStr[numb]);
                 description.setMaxLines(2);
-                description.setText("Some description");
+                description.setText(robot.getNickname());
                 description.setTextSize(17);
                 textHolder.addView(name);
                 textHolder.addView(description);
