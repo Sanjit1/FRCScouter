@@ -48,9 +48,12 @@ String teamNumber ;
                 CardView tempName = new CardView(this);
                 LinearLayout tempCardChild = new LinearLayout(this);
                 TextView nameOfTemplate = new TextView(this);
-                
-                for (int not = 0; not<Robot.numberOfGames.get(tem)){
-
+                nameOfTemplate.setText(Robot.templatesUsed.get(tem));
+                tempCardChild.addView(nameOfTemplate);
+                for (int not = 0; not<Robot.numberOfGames.get(tem); not++){
+                    TextView matchNumber = new TextView(this);
+                    matchNumber.setText(not);
+                    tempCardChild.addView(matchNumber);
                 }
 
             }
