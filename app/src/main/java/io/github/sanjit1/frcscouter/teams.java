@@ -18,11 +18,15 @@ import com.thebluealliance.api.v3.models.Event;
 import com.thebluealliance.api.v3.models.Team;
 import com.thebluealliance.api.v3.requests.TeamRequest;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -35,8 +39,8 @@ public class teams extends AppCompatActivity {
         String nickname;
         String website;
         ArrayList<String> templatesUsed;
-        ArrayList<String> numberOfGames;
-        ArrayList<ArrayList<String>> results;
+        ArrayList<Integer> numberOfGames;
+        ArrayList<HSSFWorkbook> results;
         public frcTeam(int numb){
             requester = new blueAllianceStuff("");
             number = numb;
@@ -54,7 +58,16 @@ public class teams extends AppCompatActivity {
 
                 String fileAsString = sb.toString();
                 String[] arrOfStr = fileAsString.split(System.lineSeparator(), 0);
-                for (String template : arrOfStr) templatesUsed.add(template);
+                for (String template : arrOfStr) {
+                    int rowNumb=0;
+                    templatesUsed.add(template);
+                    InputStream XLfiles = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/"+ number + "/" + template + ".xls"));
+                    results.add(new HSSFWorkbook(XLfiles));
+                    while (results.get(results.size()).getSheetAt(0).getRow(rowNumb) != null) {
+                        rowNumb++;
+                    }
+                    numberOfGames.add(rowNumb-1);
+                }
 
 
             } catch (IOException e){
