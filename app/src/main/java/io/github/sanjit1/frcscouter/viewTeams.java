@@ -37,7 +37,11 @@ String teamNumber ;
             String fAsString = stringB.toString();
             String[] arrayOfStr = fAsString.split(System.lineSeparator(), 0);
             teamNumber = arrayOfStr[0];
-            
+            frcTeam Robot = new frcTeam(Integer.parseInt(teamNumber));
+            getSupportActionBar().setTitle(teamNumber);
+            TextView textViewName = findViewById(R.id.teamName);
+            textViewName.setText(Robot.nickname);
+
 
         } catch (IOException e){}
     }
@@ -51,7 +55,7 @@ String teamNumber ;
         ArrayList<Integer> numberOfGames;
         ArrayList<HSSFWorkbook> results;
         public frcTeam(int numb){
-            requester = new blueAllianceStuff("KVyomvzVScCbzlVUxYiW7TECJrAyN7u6pzgGpiNQ92jFLu6amRviYxbJA2ORh5cc");
+            requester = new blueAllianceStuff("");
             number = numb;
             nickname = requester.getNickname(number);
             website = requester.getWebsite(number);
