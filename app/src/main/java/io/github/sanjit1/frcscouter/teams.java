@@ -24,6 +24,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class teams extends AppCompatActivity {
@@ -40,6 +41,25 @@ public class teams extends AppCompatActivity {
             requester = new blueAllianceStuff("");
             number = numb;
             nickname = requester.getNickname(number);
+            website = requester.getWebsite(number);
+            try {
+                FileReader teamList = new FileReader((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/"+number+"templatesUsed.hi"));
+                BufferedReader br = new BufferedReader(teamList);
+                StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
+                while (line != null) {
+                    sb.append(line).append("\n");
+                    line = br.readLine();
+                }
+
+                String fileAsString = sb.toString();
+                String[] arrOfStr = fileAsString.split(System.lineSeparator(), 0);
+                for (String template : arrOfStr) templatesUsed.add(template);
+
+
+            } catch (IOException e){
+
+            }
         }
 
 
@@ -160,8 +180,7 @@ public class teams extends AppCompatActivity {
 
 
             for ( int numb = 0; numb<arrOfStr.length;numb++ ){
-
-
+                frcTeam team = new frcTeam(Integer.parseInt(arrOfStr[numb]));
                 final int number = numb;
                 CardView layoutHolder = new CardView(this);
                 CardView ref = findViewById(R.id.refCard);
@@ -174,7 +193,7 @@ public class teams extends AppCompatActivity {
                 TextView description = new TextView(this);
                 name.setText(arrOfStr[numb]);
                 description.setMaxLines(2);
-                description.setText("Some description");
+                description.setText(team.nickname);
                 description.setTextSize(17);
                 textHolder.addView(name);
                 textHolder.addView(description);
