@@ -29,8 +29,9 @@
                 android:id="@+id/teamName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Name"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 tools:layout_editor_absoluteX="38dp"
                 tools:layout_editor_absoluteY="0dp" />
         </LinearLayout>

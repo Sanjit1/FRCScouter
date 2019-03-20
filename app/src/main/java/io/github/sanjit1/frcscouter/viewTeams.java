@@ -42,21 +42,27 @@ LinearLayout parent;
             String fAsString = stringB.toString();
             String[] arrayOfStr = fAsString.split(System.lineSeparator(), 0);
             teamNumber = arrayOfStr[0];
-            Toast.makeText(this,teamNumber,Toast.LENGTH_LONG);
             frcTeam Robot = new frcTeam(Integer.parseInt(teamNumber));
             getSupportActionBar().setTitle(teamNumber);
             TextView textViewName = findViewById(R.id.teamName);
             textViewName.setText(Robot.nickname);
             for(int tem = 0; tem<Robot.templatesUsed.size();tem++) {
                 CardView tempName = new CardView(this);
+                tempName.setElevation(10);
                 LinearLayout tempCardChild = new LinearLayout(this);
+                tempCardChild.setOrientation(LinearLayout.VERTICAL);
                 TextView nameOfTemplate = new TextView(this);
                 nameOfTemplate.setText(Robot.templatesUsed.get(tem));
+                nameOfTemplate.setTextSize(27);
                 tempCardChild.addView(nameOfTemplate);
                 for (int not = 0; not<Robot.numberOfGames.get(tem); not++){
+                    CardView txtHolder = new CardView(this);
+                    txtHolder.setElevation(3);
                     TextView matchNumber = new TextView(this);
-                    matchNumber.setText("Match"+not);
-                    tempCardChild.addView(matchNumber);
+                    matchNumber.setTextSize(20);
+                    matchNumber.setText("Match "+(not+1));
+                    txtHolder.addView(matchNumber);
+                    tempCardChild.addView(txtHolder);
                 }
                 tempName.addView(tempCardChild);
                 parent.addView(tempName);
@@ -71,9 +77,9 @@ LinearLayout parent;
         blueAllianceStuff requester;
         String nickname;
         String website;
-        ArrayList<String> templatesUsed;
-        ArrayList<Integer> numberOfGames;
-        ArrayList<HSSFWorkbook> results;
+        ArrayList<String> templatesUsed = new ArrayList<>();
+        ArrayList<Integer> numberOfGames = new ArrayList<>();
+        ArrayList<HSSFWorkbook> results = new ArrayList<>();
         public frcTeam(int numb){
             requester = new blueAllianceStuff("KVyomvzVScCbzlVUxYiW7TECJrAyN7u6pzgGpiNQ92jFLu6amRviYxbJA2ORh5cc");
             number = numb;
@@ -93,7 +99,7 @@ LinearLayout parent;
                 String[] arrOfStr = fileAsString.split(System.lineSeparator(), 0);
                 for (int n = 0; n<arrOfStr.length;n++) {
                     int rowNumb=0;
-                    templatesUsed.add("o");
+                    templatesUsed.add(arrOfStr[0]);
                     InputStream XLfiles = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/"+ number + "/" + arrOfStr[n] + ".xls"));
                     results.add(new HSSFWorkbook(XLfiles));
                     while (results.get(results.size()-1).getSheetAt(0).getRow(rowNumb) != null) {
