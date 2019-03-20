@@ -37,8 +37,7 @@ String teamNumber ;
             String fAsString = stringB.toString();
             String[] arrayOfStr = fAsString.split(System.lineSeparator(), 0);
             teamNumber = arrayOfStr[0];
-            TextView teams = findViewById(R.id.teamNumb);
-            teams.setText(teamNumber);
+            
 
         } catch (IOException e){}
     }
