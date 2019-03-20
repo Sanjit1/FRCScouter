@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class viewTeams extends AppCompatActivity {
 String teamNumber ;
+LinearLayout parent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ String teamNumber ;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        parent = findViewById(R.id.parent);
         try {
             FileReader cache = new FileReader((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + "/ScouterAppData/teamData/cache");
             BufferedReader buffR = new BufferedReader(cache);
@@ -40,6 +42,7 @@ String teamNumber ;
             String fAsString = stringB.toString();
             String[] arrayOfStr = fAsString.split(System.lineSeparator(), 0);
             teamNumber = arrayOfStr[0];
+            Toast.makeText(this,teamNumber,Toast.LENGTH_LONG);
             frcTeam Robot = new frcTeam(Integer.parseInt(teamNumber));
             getSupportActionBar().setTitle(teamNumber);
             TextView textViewName = findViewById(R.id.teamName);
@@ -52,10 +55,11 @@ String teamNumber ;
                 tempCardChild.addView(nameOfTemplate);
                 for (int not = 0; not<Robot.numberOfGames.get(tem); not++){
                     TextView matchNumber = new TextView(this);
-                    matchNumber.setText(not);
+                    matchNumber.setText("Match"+not);
                     tempCardChild.addView(matchNumber);
                 }
-
+                tempName.addView(tempCardChild);
+                parent.addView(tempName);
             }
 
 
@@ -76,7 +80,7 @@ String teamNumber ;
             nickname = requester.getNickname(number);
             website = requester.getWebsite(number);
             try {
-                FileReader teamList = new FileReader((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/"+number+"templatesUsed.hi"));
+                FileReader teamList = new FileReader((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/"+number+"/templatesUsed.hi"));
                 BufferedReader br = new BufferedReader(teamList);
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
@@ -87,10 +91,10 @@ String teamNumber ;
 
                 String fileAsString = sb.toString();
                 String[] arrOfStr = fileAsString.split(System.lineSeparator(), 0);
-                for (String template : arrOfStr) {
+                for (int n = 0; n<arrOfStr.length;n++) {
                     int rowNumb=0;
-                    templatesUsed.add(template);
-                    InputStream XLfiles = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/"+ number + "/" + template + ".xls"));
+                    templatesUsed.add("o");
+                    InputStream XLfiles = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/"+ number + "/" + arrOfStr[n] + ".xls"));
                     results.add(new HSSFWorkbook(XLfiles));
                     while (results.get(results.size()-1).getSheetAt(0).getRow(rowNumb) != null) {
                         rowNumb++;
