@@ -1,19 +1,13 @@
 package io.github.sanjit1.frcscouter;
 
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,27 +16,34 @@ import android.widget.Toast;
 import com.thebluealliance.api.v3.TBA;
 import com.thebluealliance.api.v3.models.Event;
 import com.thebluealliance.api.v3.models.Team;
-import com.thebluealliance.api.v3.requests.DataRequest;
 import com.thebluealliance.api.v3.requests.TeamRequest;
-
-import org.apache.poi.util.IOUtils;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class teams extends AppCompatActivity {
+
+    class frcTeam{
+        int number;
+        blueAllianceStuff requester;
+        String nickname;
+        String website;
+        ArrayList<String> templatesUsed;
+        ArrayList<String> numberOfGames;
+        ArrayList<ArrayList<String>> results;
+        public frcTeam(int numb){
+            requester = new blueAllianceStuff("");
+            number = numb;
+            nickname = requester.getNickname(number);
+        }
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +72,7 @@ public class teams extends AppCompatActivity {
 
 
             for ( int numb = 0; numb<arrOfStr.length;numb++ ){
-
-                TBA tba = new TBA("key");
-                Team robot = new Team();
-                TeamRequest c = tba.teamRequest;
-                Event[] e = c.getEvents(2658);
-                robot = c.getTeam(2658);
-
-
+                frcTeam team = new frcTeam(Integer.parseInt(arrOfStr[numb]));
                 final int number = numb;
                 CardView layoutHolder = new CardView(this);
                 CardView ref = findViewById(R.id.refCard);
@@ -94,7 +88,7 @@ public class teams extends AppCompatActivity {
                 TextView description = new TextView(this);
                 name.setText(arrOfStr[numb]);
                 description.setMaxLines(2);
-                description.setText(robot.getNickname());
+                description.setText(team.nickname);
                 description.setTextSize(17);
                 textHolder.addView(name);
                 textHolder.addView(description);
