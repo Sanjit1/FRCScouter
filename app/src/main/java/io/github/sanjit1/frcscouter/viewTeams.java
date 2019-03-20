@@ -3,8 +3,11 @@ package io.github.sanjit1.frcscouter;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
@@ -41,6 +44,16 @@ String teamNumber ;
             getSupportActionBar().setTitle(teamNumber);
             TextView textViewName = findViewById(R.id.teamName);
             textViewName.setText(Robot.nickname);
+            for(int tem = 0; tem<Robot.templatesUsed.size();tem++) {
+                CardView tempName = new CardView(this);
+                LinearLayout tempCardChild = new LinearLayout(this);
+                TextView nameOfTemplate = new TextView(this);
+                
+                for (int not = 0; not<Robot.numberOfGames.get(tem)){
+
+                }
+
+            }
 
 
         } catch (IOException e){}
@@ -55,7 +68,7 @@ String teamNumber ;
         ArrayList<Integer> numberOfGames;
         ArrayList<HSSFWorkbook> results;
         public frcTeam(int numb){
-            requester = new blueAllianceStuff("");
+            requester = new blueAllianceStuff("KVyomvzVScCbzlVUxYiW7TECJrAyN7u6pzgGpiNQ92jFLu6amRviYxbJA2ORh5cc");
             number = numb;
             nickname = requester.getNickname(number);
             website = requester.getWebsite(number);
@@ -76,12 +89,11 @@ String teamNumber ;
                     templatesUsed.add(template);
                     InputStream XLfiles = new FileInputStream((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/"+ number + "/" + template + ".xls"));
                     results.add(new HSSFWorkbook(XLfiles));
-                    while (results.get(results.size()).getSheetAt(0).getRow(rowNumb) != null) {
+                    while (results.get(results.size()-1).getSheetAt(0).getRow(rowNumb) != null) {
                         rowNumb++;
                     }
                     numberOfGames.add(rowNumb-1);
                 }
-
 
             } catch (IOException e){
 

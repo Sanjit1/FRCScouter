@@ -42,7 +42,7 @@ public class teams extends AppCompatActivity {
         ArrayList<Integer> numberOfGames;
         ArrayList<HSSFWorkbook> results;
         public frcTeam(int numb){
-            requester = new blueAllianceStuff("");
+            requester = new blueAllianceStuff("KVyomvzVScCbzlVUxYiW7TECJrAyN7u6pzgGpiNQ92jFLu6amRviYxbJA2ORh5cc");
             number = numb;
             nickname = requester.getNickname(number);
             website = requester.getWebsite(number);
