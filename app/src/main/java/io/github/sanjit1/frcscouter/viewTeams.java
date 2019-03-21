@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,12 @@ LinearLayout parent;
                     matchNumber.setText("Match "+(not+1));
                     txtHolder.addView(matchNumber);
                     tempCardChild.addView(txtHolder);
+                    txtHolder.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
                 }
                 tempName.addView(tempCardChild);
                 parent.addView(tempName);

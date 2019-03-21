@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Name"
-                android:textSize="40sp"
+                android:textSize="35sp"
                 tools:layout_editor_absoluteX="38dp"
                 tools:layout_editor_absoluteY="0dp" />
         </LinearLayout>

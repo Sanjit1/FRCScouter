@@ -44,8 +44,36 @@ public class teams extends AppCompatActivity {
         public frcTeam(int numb){
             requester = new blueAllianceStuff("KVyomvzVScCbzlVUxYiW7TECJrAyN7u6pzgGpiNQ92jFLu6amRviYxbJA2ORh5cc");
             number = numb;
-            nickname = requester.getNickname(number);
-            website = requester.getWebsite(number);
+            File teamProperties = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/"+number+"/info.hi"));
+            if(!teamProperties.exists()) {
+                nickname = requester.getNickname(number);
+                website = requester.getWebsite(number);
+                try {
+                    FileWriter nameNdSite = new FileWriter(teamProperties);
+                    nameNdSite.append(nickname);
+                    nameNdSite.append(System.lineSeparator());
+                    nameNdSite.append(website);
+                    nameNdSite.flush();
+                    nameNdSite.close();
+                }catch (IOException e){}
+
+            }else
+                {
+                    try{
+                        FileReader teamList = new FileReader((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/"+number+"/info.hi"));
+                        BufferedReader br = new BufferedReader(teamList);
+                        StringBuilder sb = new StringBuilder();
+                        String line = br.readLine();
+                        while (line != null) {
+                            sb.append(line).append("\n");
+                            line = br.readLine();
+                        }
+                        String fileAsString = sb.toString();
+                        String[] arrOfStr = fileAsString.split(System.lineSeparator(), 0);
+                        nickname = arrOfStr[0];
+                        website = arrOfStr[1];
+                    }catch (IOException e){}
+                }
             try {
                 FileReader teamList = new FileReader((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)).toString() + ("/ScouterAppData/teamData/"+number+"templatesUsed.hi"));
                 BufferedReader br = new BufferedReader(teamList);
