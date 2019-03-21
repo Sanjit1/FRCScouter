@@ -67,6 +67,8 @@ LinearLayout parent;
                     matchNumber.setText("Match "+(not+1));
                     txtHolder.addView(matchNumber);
                     tempCardChild.addView(txtHolder);
+                    int templ = tem;
+                    int nt = not;
                     txtHolder.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -75,11 +77,14 @@ LinearLayout parent;
                             try{
                                 FileWriter writer = new FileWriter(activityFile);
                                 writer.append(teamNumber);
-                                writer.append()
+                                writer.append(System.lineSeparator());
+                                writer.append(Robot.templatesUsed.get(templ));
+                                writer.append(System.lineSeparator());
+                                writer.append((nt+1)+"");
                                 writer.flush();
                                 writer.close();
                                 Intent myIntent = new Intent(getApplicationContext(),
-                                        viewTeams.class);
+                                        viewData.class);
                                 startActivity(myIntent);
                             } catch (IOException e){}
                         }
