@@ -1,5 +1,6 @@
 package io.github.sanjit1.frcscouter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +14,10 @@ import android.widget.Toast;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -67,7 +70,18 @@ LinearLayout parent;
                     txtHolder.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            File activityFile = new File ((Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)) + ("/ScouterAppData/teamData/viewerCache"));
 
+                            try{
+                                FileWriter writer = new FileWriter(activityFile);
+                                writer.append(teamNumber);
+                                writer.append()
+                                writer.flush();
+                                writer.close();
+                                Intent myIntent = new Intent(getApplicationContext(),
+                                        viewTeams.class);
+                                startActivity(myIntent);
+                            } catch (IOException e){}
                         }
                     });
                 }
